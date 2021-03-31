@@ -1,0 +1,122 @@
+<%- include('_header',{title:"Employees"}) %>
+
+<%- include('_sidebar',{title:"Employees"}) %>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Employees</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/supervisor">Home</a></li>
+                            <li class="breadcrumb-item active">Employee </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="row mb-2 ">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="/supervisor/employee">
+                                    <h3 class="card-title">Employees List</h3>
+                                </a>
+
+                                <div class="card-tools">
+                                    <form action="/supervisor/search" method="post">
+                                        <div class="input-group input-group-sm" style="width: 150px;">
+                                            <input type="text" name="employee_id" class="form-control float-right"
+                                                placeholder="Search">
+
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body table-responsive p-0">
+
+                                <table class="table table-hover text-nowrap " style="text-align: center;">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 10px">#</th>
+                                            <th>Employee ID</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Leaves Count </th>
+                                            <th style="width: 40px">Label</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for (var i = 0; i < employeeLst.length; i++) { %>
+                                        <tr>
+                                            <td><%=i+1%></td>
+                                            <td><%= employeeLst[i].employee_id  %></td>
+                                            <td><%= employeeLst[i].first_name  %></td>
+                                            <td><%= employeeLst[i].last_name  %></td>
+                                            <td><% if(employeeLst[i].total_leaves >= 60){ %>
+                                                <!-- <script>
+                                                    document.getElementById("myBar").style.width = parseInt(
+                                                        '<%= employeeLst[i].count_leaves %>') + '%';
+                                                </script> -->
+                                                <div class="progress progress-xs">
+                                                    <div class="progress-bar bg-success" id="myBar + <%= i %>">
+                                                        <script>
+                                                            document.getElementById("myBar + <%= i %>").style.width =
+                                                                parseInt(
+                                                                    '<%= employeeLst[i].total_leaves %>') + '%';
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                                <% } else { %>
+                                                <div class="progress progress-xs">
+                                                    <div class="progress-bar bg-danger" id="myBar + <%= i %>">
+                                                        <script>
+                                                            document.getElementById("myBar + <%= i %>").style.width =
+                                                                parseInt(
+                                                                    '<%= employeeLst[i].total_leaves %>') + '%';
+                                                        </script>
+                                                    </div>
+                                                </div><% } %>
+                                            </td>
+                                            <td><% if(employeeLst[i].total_leaves >= 60){ %>
+                                                <span
+                                                    class="badge bg-success"><%= employeeLst[i].total_leaves %>%</span>
+                                                <% } else { %>
+                                                <span class="badge bg-danger"><%= employeeLst[i].total_leaves %>%</span>
+                                                <% } %>
+                                            </td>
+
+                                        </tr>
+                                        <% } %>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+<footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+        <b>All rights reserved</b>
+    </div>
+    <strong>Copyright &copy; 2021 <a>DBMS Project-Group 15</a>.</strong>
+</footer>
+</body>
+<%- include('_footer') %>

@@ -1,0 +1,165 @@
+<%-include("_header", {user}) %>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="../../assets/css/viewBrnaches.css">
+
+<div>
+    <div class="container-fluid">
+        <div class="row">
+           
+            <div class="col-12">
+                <div class="row" style="margin-top: 159px;">
+                     
+                    <% if(error) {%>
+                        <div class="col-9 m-auto">
+                            <div class="alert alert-danger" role="alert">
+                               <%=error%>
+                              </div>
+                        </div>
+                    <%} %>
+                    <% if(success) {%>
+                        <div class="col-9 m-auto">
+                            <div class="alert alert-success" role="alert">
+                               <%=success%>
+                              </div>
+                        </div>
+                    <%} %>
+<!-- ############################################################################################################################ -->
+<div class="container-xl">
+    <div class="table-responsive">
+        <div class="table-wrapper">			
+            <div class="table-title">
+                <div class="row">
+                   
+                    <div class="col-sm-4 m-auto">
+                        <h2 class="text-center">All Branch Details</h2>
+                    </div>
+
+
+
+
+
+
+                    <div class="col-12">
+                        <p>
+                            <button class="btn btn btn-primary  btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-plus"></i> Add Branch</button>
+                        </p>
+                          <div class="collapse" id="collapseExample">
+                            <div class="card card-body ">
+                                <form method="POST" action="/admin/addBranch">
+                                    <div class="row">
+                                      <div class="col">
+                                        <input type="text" class="form-control" placeholder="branch name" name="branch_name">
+                                      </div>
+                                      <div class="col">
+                                        <input type="text" class="form-control" placeholder="address" name="address">
+                                      </div>
+                                      <div class="col">
+                                        <input type="text" class="form-control" placeholder="city" name="city">
+                                      </div>
+                                      <div class="col">
+                                        <input type="text" class="form-control" placeholder="Postal code" name="postal_code">
+                                      </div>
+                                      <div class="col">
+                                        <input type="text" class="form-control" placeholder="Country" name="country">
+                                      </div>
+                                    </div>
+                                    <button  type="submit" class="btn btn-primary btn-sm mt-2">submit</button>
+                                  </form>
+                            </div>
+                          </div>
+
+                    </div>
+
+
+
+
+
+                   
+                </div>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Branch <i class="fa fa-sort"></i></th>
+                        <th>Address</th>
+                        <th>City <i class="fa fa-sort"></i></th>
+                        <th>Postal code Code</th>
+                        <th>Country <i class="fa fa-sort"></i></th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   <% if(branches && branches[0]){ 
+                        branches.forEach(function( branch, index){ %>
+                    <tr>
+                        <td><%=index+1%></td>
+                        <td><%=branch.branch_name%></td>
+                        <td><%=branch.address%></td>
+                        <td><%=branch.city%></td>
+                        <td><%=branch.postal_code%></td>
+                        <td><%=branch.country%></td>
+                       
+                        <td>
+                            <a href="/admin/branch/<%=branch.branch_name%>" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
+                            <a href="/admin/editBranch/<%=branch.branch_name%>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                        </td>
+                    </tr>
+                    <%})}else{ %>
+                        <tr>
+                            <td>1</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td> </td>
+                        </tr>
+                    <% }%>
+                         
+                </tbody>
+            </table>
+           
+        </div>
+    </div>        
+</div>
+
+<!-- ##################################################################################################################################### -->
+                </div>
+            </div>
+     </div>
+  </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+        // Animate select box length
+        var searchInput = $(".search-box input");
+        var inputGroup = $(".search-box .input-group");
+        var boxWidth = inputGroup.width();
+        searchInput.focus(function(){
+            inputGroup.animate({
+                width: "300"
+            });
+        }).blur(function(){
+            inputGroup.animate({
+                width: boxWidth
+            });
+        });
+    });
+    </script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<%-include("_footer", {user}) %>
+
+
+
+
+
+
+
+
+
+     

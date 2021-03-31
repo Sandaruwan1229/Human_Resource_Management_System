@@ -1,0 +1,146 @@
+<%- include('_header',{title:"Leave Request"}) %>
+
+<%- include('_sidebar',{title:""}) %>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Leave Request</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/supervisor/leaves">Leave List</a></li>
+                            <li class="breadcrumb-item active">Leave Request</li>
+                        </ol>
+                    </div>
+                    <div class="col-md-6 leaveReq">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Leaving Request</h3>
+                            </div>
+                            <div class="card-body">
+                                <form class="row g-3" action="/supervisor/approve" method="POST">
+                                    <input type="text" name="leave_id" value="<%= leave[0].leave_id  %>"
+                                        style="display: none;">
+                                    <div class="col-md-8">
+                                        <div class="form-group row">
+                                            <label for="inputEmail4" class="form-label col-m-4">Leaving ID :</label>
+                                            <div class="col-md-5">
+                                                <p><%= leave[0].leave_id  %></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group row">
+                                            <label for="inputEmail4" class="form-label col-m-4">Employee ID :</label>
+                                            <div class="col-md-5">
+                                                <p><%= leave[0].employee_id  %></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="col-12">
+                                        <h5 style="text-align: center;">Remaining Leaves</h5>
+                                    </div>
+                                    <table class="table table-bordered table-hover" style="text-align: center;">
+                                        <tbody>
+                                            <tr>
+                                                <th>Annual</th>
+                                                <td><%= remaining_leaves[0].anual  %></td>
+                                                <th>Casual</th>
+                                                <td><%= remaining_leaves[0].casual  %></td>
+                                                <th>Maternity</th>
+                                                <td><%= remaining_leaves[0].maternity  %></td>
+                                                <th>No Pay</th>
+                                                <td><%= remaining_leaves[0].no_pay  %></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <hr>
+                                    <div class="col-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail4" class="form-label col-m-4">Start Date :</label>
+                                            <div class="col-md-4">
+                                                <p>
+                                                    <%= date %>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail4" class="form-label col-m-4">Leaving Type :</label>
+                                            <div class="col-md-4">
+                                                <p>
+                                                    <%= leave[0].leave_type %>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <label for="inputEmail4" class="form-label col-m-4">Reason :</label>
+                                            <div class="col-md-8">
+                                                <p> <%= leave[0].reason  %>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group row">
+                                            <label for="inputEmail4" class="form-label col-m-4">Duration :</label>
+                                            <div class="col-md-4">
+                                                <p> <%= leave[0].duration  %> Days
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="approved" type="checkbox"
+                                                id="approved">
+                                            <label class="form-check-label" for="gridCheck">
+                                                Leave approved
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="ignored" type="checkbox" id="ignored">
+                                            <label class="form-check-label" for="gridCheck">
+                                                Leave ignored
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <br>
+                                    <hr>
+                                    <div class="col-12">
+                                        <button type="submit" id="myBtn1" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</div>
+<footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+        <b>All rights reserved</b>
+    </div>
+    <strong>Copyright &copy; 2021 <a>DBMS Project-Group 15</a>.</strong>
+</footer>
+</body>
+<%- include('_footer') %>

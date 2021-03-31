@@ -1,0 +1,336 @@
+<%- include('_header',{title:"Add Employee"}) %>
+<%- include('_sidebar') %>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="background:linear-gradient(to bottom,rgb(212, 212, 212),white) ;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mx-2">
+                <div class="col-sm-12" style="padding-right: 1vw">
+                    <!-- <h1>Icons</h1> -->
+                    <h1 style="color: rgb(17, 71, 172); text-align: center; text-decoration: underline; margin: 3%;">Add
+                        Employee Details</h1>
+                    <form method="POST" action="submitEmployee">
+                        <% if(error) {%>
+                        <div class="col-9 m-auto">
+                            <div class="alert alert-danger" role="alert">
+                                <%=error%>
+                            </div>
+                        </div>
+                        <%} %>
+                        <div class="card card-default"
+                            style="background:linear-gradient(to left,rgb(180, 180, 180),rgb(219, 203, 203),rgb(180, 180, 180)) ;">
+                            <div class="card-header" style="background: rgb(6, 54, 82);">
+                                <h3 class="card-title" style="color: rgb(255, 255, 255);">Personal details</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <!-- text input -->
+                                        <div class="form-group">
+                                            <label>NIC</label>
+                                            <input type="text" class="form-control" placeholder="Enter ..." name="NIC"
+                                                value="<%=HR.NIC%>" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Email</label>
+                                        <!-- text input -->
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i
+                                                            class="fas fa-envelope"></i></span>
+                                                </div>
+                                                <input type="email" class="form-control" placeholder="Email"
+                                                    name="email" value="<%=HR.email%>" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <!-- text input -->
+                                        <div class="form-group">
+                                            <label>First Name</label>
+                                            <input type="text" class="form-control" placeholder="Enter ..."
+                                                name="first_name" value="<%=HR.first_name%>" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <!-- text input -->
+                                        <div class="form-group">
+                                            <label>Middle Name</label>
+                                            <input type="text" class="form-control" placeholder="Enter ..."
+                                                name="middle_name" value="<%=HR.middle_name%>" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <!-- text input -->
+                                        <div class="form-group">
+                                            <label>Last Name</label>
+                                            <input type="text" class="form-control" placeholder="Enter ..."
+                                                name="last_name" value="<%=HR.last_name%>" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <!-- text input -->
+                                        <div class="form-group">
+                                            <label>Contact number:</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                                </div>
+                                                <input type="number" class="form-control" name="phone"
+                                                    value="<%=HR.phone%>" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Gender</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gender" value="Male"
+                                                    required>
+                                                <label class="form-check-label" style="padding-right: 7%;">Male</label>
+
+                                                <input class="form-check-input" type="radio" name="gender"
+                                                    value="Female" required>
+                                                <label class="form-check-label">Female</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Birth Date:</label>
+                                            <input class="form-control datetimepicker-input" type="date" name="birthday"
+                                                value="<%=HR.birthday%>" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Password</label>
+                                            <input type="password" class="form-control" placeholder="Enter ..."
+                                                name="password" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Re-enter password</label>
+                                            <input type="password" class="form-control" placeholder="Enter ..."
+                                                name="repassword" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- input states -->
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <!-- text input -->
+                                        <div class="form-group">
+                                            <label>Address</label>
+                                            <input type="text" class="form-control" placeholder="Enter ..."
+                                                name="address_id" value="<%=HR.address_id%>" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>City</label>
+                                            <input type="text" class="form-control" placeholder="Enter ..." name="city"
+                                                value="<%=HR.city%>" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Postal Code</label>
+                                            <input type="number" class="form-control" placeholder="Enter ..."
+                                                name="postal_code" value="<%=HR.postal_code%>" required>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Country</label>
+                                            <input type="text" class="form-control" placeholder="Enter ..."
+                                                name="country" value="<%=HR.country%>" required>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card-default"
+                            style="background:linear-gradient(to left,rgb(180, 180, 180),rgb(219, 203, 203),rgb(180, 180, 180)) ; margin-top: 5%;">
+                            <div class="card-header" style="background: rgb(6, 54, 82);">
+                                <h3 class="card-title" style="color: rgb(255, 255, 255);">Employee Details</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <!-- select -->
+                                        <div class="form-group">
+                                            <label>Branch</label>
+                                            <select class="form-control" name="branch_name">
+                                                <% if(branches && branches[0]){ branches.forEach(function(branch){ %>
+                                                <option value="<%=branch.branch_name%>">
+                                                    <%=branch.branch_name%>
+                                                </option>
+                                                <% })} else{ %>
+                                                <option value="">no branches available</option>
+                                                <% }%>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <!-- select -->
+                                        <div class="form-group">
+                                            <label>Job Title</label>
+                                            <select class="form-control" name="jobTitle">
+                                                <% if(Jobtypes && Jobtypes[0]){ Jobtypes.forEach(function(Jobtype){ %>
+                                                <% if(Jobtype.job_title!='HR') {%>
+                                                <option value="<%=Jobtype.job_title%>">
+                                                    <%=Jobtype.job_title%>
+                                                </option>
+                                                <%} })} else{ %>
+                                                <option value="">no job types available</option>
+                                                <% }%>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <!-- select -->
+                                        <div class="form-group">
+                                            <label>Department</label>
+                                            <select class="form-control" name="department">
+                                                <% if(departments && departments[0]){ departments.forEach(function(department){%>
+                                                <option value="<%=department.dept_name%>">
+                                                    <%=department.dept_name%>
+                                                </option>
+                                                <% })} else{ %>
+                                                <option value="">no departments available</option>
+                                                <% }%>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <!-- select -->
+                                        <div class="form-group">
+                                            <label>Pay Grade Level</label>
+                                            <select class="form-control" name="payGrade">
+                                                <% if(payGrades && payGrades[0]){ payGrades.forEach(function(payGrade){%>
+                                                <option value="<%=payGrade.paygrade_level%>">
+                                                    <%=payGrade.paygrade_level%>
+                                                </option>
+                                                <% })} else{ %>
+                                                <option value="">no payGrades</option>
+                                                <% }%>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <!-- select -->
+                                        <div class="form-group">
+                                            <label>Employee Status</label>
+                                            <select class="form-control" name="empStatus">
+                                                <% if(employee_statuses && employee_statuses[0]){ employee_statuses.forEach(function(employee_status){ %>
+                                                <option value="<%=employee_status.e_status_name%>">
+                                                    <%=employee_status.e_status_name%>
+                                                </option>
+                                                <% })} else{ %>
+                                                <option value="">no employee state</option>
+                                                <% }%>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+                        <!-- custom attributes section -->
+                        <% if(customAttributes && customAttributes[0]){ %>
+                        <div class="card card-default"
+                            style="background:linear-gradient(to left,rgb(180, 180, 180),rgb(219, 203, 203),rgb(180, 180, 180)) ; margin-top: 5%;">
+                            <div class="card-header" style="background: rgb(6, 54, 82);">
+                                <h3 class="card-title" style="color: rgb(255, 255, 255);">Employee Details additional
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+
+
+                                    <% customAttributes.forEach(function(customAttribute){
+                                        if(customAttribute.type=="boolean") { %>
+                                    <div class="col-sm-6">
+                                        <div class="form-group" name>
+                                            <label for=""><%=customAttribute.name%>:</label>
+                                            <select class="form-control" id="exampleFormControlSelect1"
+                                                name="<%=customAttribute.name%>">
+                                                <option value="false">false</option>
+                                                <option value="true">true</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <% }else if(customAttribute.type=="varchar"){ %>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for=""><%=customAttribute.name%>:</label>
+                                            <input class="form-control" type="text" name="<%=customAttribute.name%>"
+                                                placeholder="" value="<%=customAttribute.default_val%>">
+                                        </div>
+                                    </div>
+                                    <% }else if(customAttribute.type=="integer"){ %>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for=""><%=customAttribute.name%>:</label>
+                                            <input class="form-control" type="number" name="<%=customAttribute.name%>"
+                                                placeholder="" value="<%=customAttribute.default_val%>">
+                                        </div>
+                                    </div>
+                                    <% }}) %>
+                                </div>
+                            </div>
+                        </div>
+
+                        <% } %>
+                        <!-- end of the custom attributes -->
+
+
+
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-block btn-primary"
+                                        onclick="check()">Save</button>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+
+                                    <button type="Submit" class="btn btn-block btn-primary" name="submitButton"
+                                        id="sbmtbtn" onclick="disableButon()" disabled>Submit</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                    </form>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+
+
+
+    <%- include('_footer') %>

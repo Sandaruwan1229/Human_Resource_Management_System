@@ -1,0 +1,165 @@
+<%- include('_header',{title:"Search"}) %>
+
+ 
+      <%- include('_sidebar',{title:"Search"}) %>
+
+
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="card"  style="background: rgb(223,164,102);
+            background: linear-gradient(90deg, rgba(223,164,102,1) 5%, rgba(255,206,155,1) 50%, rgba(223,164,102,1) 95%);">
+        <form id="search_employees" action="/manager/searchEmployees" method="POST" >
+            <div class="card-body">
+            <div class="row">
+              <!-- select branch name -->
+            
+              <div class="col-md-4">
+            <div class="form-group">
+              <label>Branch</label>
+              <select name="branchSelect" class="form-control select2" style="width: 100%;">
+                  <option value="<%= userBranch %>"><%= userBranch %></option>
+              </select>
+            </div>
+            </div>
+        
+           <!-- select Deptment name -->
+           <div class="col-md-4">
+            <div class="form-group">
+              <label>Department</label>
+              <select name="deptSelect" class="form-control select2" style="width: 100%;">
+                  <option value="<%= userDepartment %>"><%= userDepartment %></option>
+              </select>
+            </div>
+            </div>
+             <!-- select job title name -->
+             <div class="col-md-4">
+              <div class="form-group">
+                <label>Job Title</label>
+                <select name="jobTypeSelect" class="form-control select2" style="width: 100%;">
+                  <option selected="selected" value="allJobtypes">All</option>
+                  <% if (Jobtypes.length> 0){ %>
+                    <% Jobtypes.forEach(Jobtype=> { %>
+                      <% if (Jobtype.job_title != user && Jobtype.job_title !="HR"){ %>
+                      <option value="<%= Jobtype.job_title %>"><%= Jobtype.job_title %></option>
+                      <% } %>
+                    <% }) %>
+                  <% } %>
+                </select>
+              </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100px;" id="searchEmployees">Search</button>
+            </div>
+            <!-- card body -->
+          </form>
+            </div>
+            <!-- /card -->
+          </div><!-- /.container-fluid -->
+        </section>
+    
+        <!-- Main content -->
+        <section class="content">
+          <div class="container-fluid">
+            <div class="card" >
+              <div class="card-header">
+                <h3 class="card-title" style="font-size: 40px;">Employees</h3>
+                <a class="btn btn-primary float-right newSupply" href="/manager/viewData">View PIM Data</a>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead style="background: rgb(98, 112, 121); color: rgb(255, 255, 255);" >
+                    <tr>
+                      <th style="width: 40px">#</th>
+                      <th>Employee ID</th>
+                      <th>NIC</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      
+                   
+                      <th style="width: 120px" class="text-center">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody >
+                    <% for (var i = 0; i < employeeList.length; i++) { %>
+                      <tr data-id="<%= employeeList[i].employee_id %>">
+                        <td><%= i+1 %></td>
+                        <td><%= employeeList[i].employee_id %></td>
+                        <td><%= employeeList[i].nic %></td>
+                        <td><%= employeeList[i].first_name %></td>
+                        <td><%= employeeList[i].last_name %></td>
+                        <td class="text-center">
+                          <a href="/manager/viewData/<%= employeeList[i].employee_id %>" class="viewData" data-id="<%= employeeList[i].employee_id %>"><i class="fas fa-edit"></i></a>
+                        </td>
+                      </tr>
+                    <% } %>
+                  </tbody>
+                  <tfoot style="background: rgb(98, 112, 121); color: rgb(255, 255, 255);" >
+                    <tr>
+                      <th>#</th>
+                      <th>Employee ID</th>
+                      <th>NIC</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                
+                   
+                 
+                      <th style="width: 120px" class="text-center">Action</th>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+    
+          </div>
+          <!-- /.card -->
+          </div><!-- /.container-fluid -->
+        </section>
+      </br>
+        <!-- /.content -->
+      </div>
+      <!-- /.content-wrapper -->
+    
+    <%- include('_footer') %>
+    <!-- DataTables  & Plugins -->
+<script src="/assets/public/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/assets/public/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/assets/public/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/assets/public/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="/assets/public/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/assets/public/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="/assets/public/plugins/jszip/jszip.min.js"></script>
+<script src="/assets/public/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="/assets/public/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="/assets/public/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="/assets/public/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="/assets/public/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+
+
+
+
+
+<script>
+    $(function () {
+      $("#example1").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print"]
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+ //Initialize Select2 Elements
+ $('.select2').select2();
+
+//Initialize Select2 Elements
+// $('.select2bs4').select2({
+//   theme: 'bootstrap4'
+// })
+});
+  
+   
+</script>
+</html>
+

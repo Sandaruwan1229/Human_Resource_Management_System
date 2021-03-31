@@ -1,0 +1,54 @@
+<%-include("_header", {user}) %>
+
+
+<div>
+    <div class="container-fluid" style="min-height: 91vh;" >
+        <div class="row">
+           
+            <div class="col-12">
+                <div class="row" style="margin-top: 120px;">
+                     
+                    <% if(error) {%>
+                        <div class="col-8 m-auto">
+                            <div class="alert alert-danger" role="alert">
+                               <%=error%>
+                              </div>
+                        </div>
+                    <%} %>
+                  
+<!-- ####################################################################################################### -->
+                    <div class="col-8 m-auto p-5  bg-light">
+                             <div class="col-sm-8"><h2>Job Title: <%=jobType.job_title%> </h2></div>
+                        <form action="/admin/editJobType/<%=jobType.job_title%>" method="post">
+                            <div class="form-group">
+                                <label for="">duration</label>
+                                <input type="text" class="form-control" name="description" value="<%=jobType.description%>">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">requirement qualification</label>
+                                <input type="text" class="form-control" name="req_qualification" value="<%=jobType.req_qualification%>">
+                            </div>
+                            <div class="form-group">
+                                <label for="">prerequisites</label>
+                                <input type="text" class="form-control" name="prerequisites" value="<%=jobType.prerequisites%>">
+                            </div>
+                            
+                           
+                            
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                          </form>
+
+<!-- ################################################################################################# -->
+                    </div>
+
+
+
+
+                </div>
+            </div>
+     </div>
+  </div>
+</div>
+
+<%-include("_footer", {user}) %>

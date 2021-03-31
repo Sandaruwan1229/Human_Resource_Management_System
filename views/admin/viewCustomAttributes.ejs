@@ -1,0 +1,92 @@
+<%-include("_header", {user}) %>
+
+
+<div>
+    <div class="container-fluid" style="min-height: 91vh;" >
+        <div class="row">
+           
+            <div class="col-10 m-auto">
+                <div class="row" style="margin-top: 120px;">
+                     
+                    <% if(error) {%>
+                        <div class="col-9 m-auto">
+                            <div class="alert alert-danger" role="alert">
+                               <%=error%>
+                              </div>
+                        </div>
+                    <%} %>
+                    <% if(success) {%>
+                        <div class="col-9 m-auto">
+                            <div class="alert alert-success" role="alert">
+                               <%=success%>
+                              </div>
+                        </div>
+                    <%} %>
+
+<!-- ################################################################################################################################### -->
+<div class="container-xl">
+    <div class="table-responsive">
+        <div class="table-wrapper">			
+            <div class="table-title">
+                <div class="row">
+                    <a href="/admin/addCustomAttribute"><button  type="button" class="btn btn-primary btn-sm mt-2">Add new attribute</button></a>
+
+                    <div class="col-sm-4 m-auto">
+                        <h2 class="text-center">custom attributes</h2>
+                    </div>           
+                </div>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name <i class="fa fa-sort"></i></th>
+                        <th>type</th>
+                        <th>size <i class="fa fa-sort"></i></th>
+                        <th>default value</th>
+                        <th>action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   <% if(customAttributes && customAttributes[0]){ 
+                    customAttributes.forEach(function( customAttribute, index){ %>
+                    <tr>
+                        <td><%=index+1%></td>
+                        <td><%=customAttribute.name%></td>
+                        <td><%=customAttribute.type%></td>
+                        <td><%=customAttribute.size%></td>
+                        <td><%=customAttribute.default_val%></td>
+        
+                       
+                        <td>
+                           <a href="/admin/deleteCustomAttribute/<%=customAttribute.name%>" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                        </td>
+                    </tr>
+                    <%})}else{ %>
+                        <tr>
+                            <td>1</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          
+                        </tr>
+                    <% }%>
+                         
+                </tbody>
+            </table>
+           
+        </div>
+    </div>        
+</div>
+
+
+<!-- ##################################################################################################################################### -->
+                </div>
+            </div>
+     </div>
+  </div>
+</div>
+
+<%-include("_footer", {user}) %>

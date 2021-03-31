@@ -1,0 +1,131 @@
+<%- include('_header',{title:"View Supervisor"}) %>
+
+ 
+      <%- include('_sidebar',{title:"View Supervisor"}) %>
+
+
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-12">
+                <!-- <h1>Icons</h1> -->
+
+                <div class="card card-primary" style="background: rgb(223,164,102);
+                background: linear-gradient(90deg, rgba(223,164,102,1) 5%, rgba(255,206,155,1) 50%, rgba(223,164,102,1) 95%);">  
+                  <form  id="" action="/manager/viewSupervisor" method="POST">
+                    <div class="card-body">  
+                      <div class="form-group">
+                        <label>Enter Employee ID To Find Supervisor</label>
+                        <input type="number" class="form-control" id="e_id" name="e_id" placeholder="Enter Employee ID" required>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Search</button>
+                  </form>
+                </br> </br>
+             <% if(!searchSupervisorErr){ %>
+                  <div class="row">
+                    <div class="col-2">
+                      <label>Emplyee ID: </label>
+                      <input type="text" class="form-control" value="<%= searchSupervisormsg.length>0 ? searchSupervisormsg[0].employee_id : ''%>" disabled>
+                    </div>
+                    <div class="col-2">
+                      <label>Supervisor ID: </label>
+                      <input type="text" class="form-control" value="<%= searchSupervisormsg.length>0 ? searchSupervisormsg[0].supervisor_id : ''%>" disabled>
+                    </div>
+                  </div>
+               <% }else{%>
+                  <div id="err_msg4" class="alert alert-success text-center" role="alert">
+                   No Supervisor or Invalid ID
+              <!-- for error msg -->
+                 </div>
+              <% } %>
+                     
+                </div>
+      
+              </div>
+            </div>
+          </div><!-- /.container-fluid -->
+        </section>
+    
+        <!-- Main content -->
+        <section class="content">
+          <div class="container-fluid">
+                 <!-- start table -->
+           <div class="card" >
+            <div class="card-header">
+              <h3 class="card-title" style="font-size: 30px;">Supervisor Table</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <div id="info_msg">
+                <!-- for msg -->
+              </div>
+              <table class="table table-bordered table-hover" id="set_order_table">
+                <thead style="background: rgb(31, 111, 158); color: rgb(255, 255, 255);">
+                  <tr>
+                    <th style="width: 40px">#</th>
+                      <th>Supervisor ID</th>
+                      <th>NIC</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th style="width: 120px" class="text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody style="background:linear-gradient(to left,rgb(180, 180, 180),rgb(219, 203, 203),rgb(180, 180, 180)) ;">
+                  <% for (var i = 0; i < supervisorList.length; i++) { %>
+                    <tr data-id="<%= supervisorList[i].employee_id %>">
+                      <td><%= i+1 %></td>
+                      <td><%= supervisorList[i].employee_id %></td>
+                      <td><%= supervisorList[i].nic %></td>
+                      <td><%= supervisorList[i].first_name %></td>
+                      <td><%= supervisorList[i].last_name %></td>
+                      <td class="text-center">
+                        <a href="/manager/viewData/<%= supervisorList[i].employee_id %>" class="viewData" data-id="<%= supervisorList[i].employee_id %>"><i class="fas fa-edit"></i></a>
+                        <a href="" class="deleteData" id="<%= supervisorList[i].employee_id %>" onclick="return confirm('Do you want to remove this supervisor?')?deleteSupervisor('<%= supervisorList[i].employee_id %>'):'';"><i class="fas fa-trash-alt"></i></a>
+                      </td>
+                    </tr>
+                  <% } %>
+                </tbody>
+              </table>
+              </br>
+            </div>
+          </div>
+          <!-- stop table -->
+          
+          </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+      </div>
+      <!-- /.content-wrapper -->
+    
+    <%- include('_footer') %>
+    <script type="text/javascript">
+      
+ function deleteSupervisor(employee_id) {
+          $.ajax({  
+                    type: 'POST',
+                    url: '/manager/viewSupervisor/delete',
+                    data: {
+                        'employee_id': employee_id,
+                    },
+                    success: function (response) {
+                        if(response.err!==""){
+                        // alert(response.err);
+                     
+                        return
+                        }
+                        if (response.result === 'redirect') {
+                            //redirecting
+                      
+                            window.location.replace(response.url);
+                        }
+                    },
+                    error: function (res) {
+                    }
+                });
+        }
+      
+    </script>
+    </html>

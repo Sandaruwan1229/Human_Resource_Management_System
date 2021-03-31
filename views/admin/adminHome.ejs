@@ -1,0 +1,35 @@
+<%-include("_header", {user}) %>
+
+
+<div>
+    <div class="container-fluid">
+        <div class="row">
+           
+            <div class="col-12">
+                <div class="row" style="margin-top: 159px;">
+                     
+                    <% if(error) {%>
+                        <div class="col-9 m-auto">
+                            <div class="alert alert-danger" role="alert">
+                               <%=error%>
+                              </div>
+                        </div>
+                    <%} %>
+                    <% if(success) {%>
+                        <div class="col-9 m-auto">
+                            <div class="alert alert-success" role="alert">
+                               <%=success%>
+                              </div>
+                        </div>
+                    <%} %>
+
+
+
+
+                </div>
+            </div>
+     </div>
+  </div>
+</div>
+
+<%-include("_footer", {user}) %>

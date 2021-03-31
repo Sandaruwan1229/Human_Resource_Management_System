@@ -1,0 +1,58 @@
+<%-include("_header", {user}) %>
+
+
+<div>
+    <div class="container-fluid" style="min-height: 91vh;" >
+        <div class="row">
+           
+            <div class="col-12">
+                <div class="row" style="margin-top: 120px;">
+                     
+                    <% if(error) {%>
+                        <div class="col-8 m-auto">
+                            <div class="alert alert-danger" role="alert">
+                               <%=error%>
+                              </div>
+                        </div>
+                    <%} %>
+                  
+<!-- ####################################################################################################### -->
+                    <div class="col-8 m-auto p-5  bg-light">
+                             <div class="col-sm-8"><h2>Pay Grade <%=paygrade_level%> Leaves</h2></div>
+                        <form action="/admin/editLeave/<%=paygrade_level%>" method="post">
+                            <div class="form-group">
+                                <label for="">Anual Leaves</label>
+                                <input type="number" class="form-control" name="anual" value="<%=leave?leave.anual:''%>">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Casual Leaves</label>
+                                <input type="number" class="form-control" name="casual" value="<%=leave?leave.casual:''%>">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="">Maternity Leaves</label>
+                                <input type="number" class="form-control" name="maternity" value="<%=leave?leave.maternity:''%>">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">No pay Leaves</label>
+                                <input type="number" class="form-control" name="no_pay" value="<%=leave?leave.no_pay:''%>">
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                          </form>
+
+<!-- ################################################################################################# -->
+                    </div>
+
+
+
+
+                </div>
+            </div>
+     </div>
+  </div>
+</div>
+
+<%-include("_footer", {user}) %>

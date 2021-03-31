@@ -1,0 +1,121 @@
+<%-include('_header')%>
+    <div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-11 m-auto">
+                    <div class="row" style="margin-top: 159px;">
+                        <% if(error) {%>
+                            <div class="col-9 m-auto">
+                                <div class="alert alert-danger" role="alert">
+                                   <%=error%>
+                                  </div>
+                            </div>
+                        <%} %>
+                        <div class="col-9 m-auto" style="padding: 70px;background-color: #f2f2f2;">
+                            <h1 class="text-center" style="color: rgb(134,192,251);">SIGNUP</h1>
+                            <form method="POST" action="/signup">
+                                <div class="form-group mb-3" ><input class="form-control" type="text" name="NIC" placeholder="NIC" value="<%=NIC%>"></div>
+                                <div class="form-group mb-3" ><input class="form-control" type="text" name="first_name" placeholder="First Name" value="<%=first_name%>"></div>
+                                <div class="form-group mb-3" ><input class="form-control" type="text" name="middle_name" placeholder="Middle Name"></div>
+
+                                <div class="form-group mb-3" ><input class="form-control" type="text" name="last_name" placeholder="Last Name" value="<%=middle_name%>"></div>
+                                <div class="form-group mb-3" ><input class="form-control" type="text" name="gender" placeholder="Gender" value="<%=gender%>"></div>
+                                <div class="form-group mb-3" ><input class="form-control" type="text" name="birthday" placeholder="Birthday" value="<%=birthday%>"></div>
+
+                                <div class="form-group mb-3"><input class="form-control" type="text" name="address" placeholder="Address" value="<%=address%>"></div>
+                                <div class="form-group mb-3"><input class="form-control" type="text" name="city" placeholder="city" value="<%=city%>"></div>
+                                <div class="form-group mb-3"><input class="form-control" type="text" name="postal_code" placeholder="postal code" value="<%=postal_code%>"></div>
+                                <div class="form-group mb-3"><input class="form-control" type="text" name="country" placeholder="country" value="<%=country%>"></div>
+    
+                                <div class="form-group mb-3" ><input class="form-control" type="text" name="email" placeholder="email" value="<%=email%>"></div>
+
+                                <div class="form-group mb-3" ><input class="form-control" type="password" name="password" placeholder="Password" value="<%=password%>"></div>
+
+                                <div class="form-group mb-3">
+                                    <select class="form-control" id="exampleFormControlSelect1" name="branch_name">
+                                        <% 
+                                            if(branches && branches[0]){
+                                            branches.forEach(function(branch){ %>
+                                                                <option value="<%=branch.branch_name%>"><%=branch.branch_name%></option>
+                                            <% })}
+                                            else{ %>
+                                                                 <option value="">no branches available</option>
+                                        <% }%>
+                                    </select>
+                                 </div>
+           
+            
+
+                                <div class="form-group mb-3">
+                                    <select class="form-control" id="exampleFormControlSelect1" name="job_title">
+                                        <% 
+                                        if(Jobtypes && Jobtypes[0]){
+                                        Jobtypes.forEach(function(Jobtype){ %>
+                                            <option value="<%=Jobtype.job_title%>"><%=Jobtype.job_title%></option>
+                                        <% })}
+                                        else{ %>
+                                            <option value="">no job types available</option>
+                                    <% }%>
+                                    </select>                                                         
+                                        
+                                </div>
+
+
+
+                                <div class="form-group mb-3">                                
+                                    <select class="form-control" id="exampleFormControlSelect1" name="dept_name">
+                                        <% 
+                                        if(departments && departments[0]){ 
+                                            departments.forEach(function(department){%>
+                                            <option value="<%=department.dept_name%>"><%=department.dept_name%></option>
+                                        <% })}
+                                        else{ %>
+                                            <option value="">no departments available</option>
+                                    <% }%>
+                                    </select>                                                     
+                            
+
+                                </div>
+
+
+
+                                <div class="form-group mb-3">
+                                                    <select class="form-control" id="exampleFormControlSelect1" name="paygrade_level">
+                                                        <% 
+                                                        if(payGrades && payGrades[0]){
+                                                            payGrades.forEach(function(payGrade){%>
+                                                            <option value="<%=payGrade.paygrade_level%>"><%=payGrade.paygrade_level%></option>
+                                                        <% })}
+                                                        else{ %>
+                                                            <option value="">no payGrades</option>
+                                                    <% }%>
+                                                    </select>
+                                </div>
+
+
+
+                                <div class="form-group mb-3">
+                                                    <select class="form-control" id="exampleFormControlSelect1" name="e_status_name">
+                                                        <% 
+                                                        if(employee_statuses && employee_statuses[0]){
+                                                            employee_statuses.forEach(function(employee_status){ %>
+                                                                            <option value="<%=employee_status.e_status_name%>"><%=employee_status.e_status_name%></option>
+                                                        <% })}
+                                                        else{ %>
+                                                            <option value="">no employee state</option>
+                                                    <% }%>
+                                                    </select>
+                                    
+                                </div>
+
+                                <div class="form-group mb-3" ><button class="btn btn-primary" type="submit">Button</button></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<%-include('_footer') %>

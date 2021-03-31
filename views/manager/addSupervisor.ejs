@@ -1,0 +1,150 @@
+<%- include('_header',{title:"Add Supervisor"}) %>
+
+ 
+      <%- include('_sidebar',{title:"Add Supervisor"}) %>
+
+
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-12">
+                <!-- <h1>Icons</h1> -->
+
+                <div class="card card-primary" style="background: rgb(223,164,102);
+                background: linear-gradient(90deg, rgba(223,164,102,1) 5%, rgba(255,206,155,1) 50%, rgba(223,164,102,1) 95%);">  
+                  <form  id="addSupervisor" action="/manager/addSupervisor" method="POST">
+                    <div class="card-body">  
+                        <div id="err_msg4">
+                        <!-- for error msg -->
+                        </div>
+                      <div class="form-group">
+                        <label>Select Supervisor ID To See The Supervisor Group or To Add Members</label>
+                        <!-- <input type="number" class="form-control" id="supervisor_id" name="supervisor_id" placeholder="Enter Employee ID" required> -->
+                        <select class="form-control" name='selected_supervisor'>
+                          <option value="">select an employee</option>
+                          <% if (canBeSupervisors.length > 0){ %>
+                            <% canBeSupervisors.forEach(Employee => { %>
+                              <option value="<%= Employee.employee_id %>" ><%= Employee.employee_id %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= Employee.first_name %>&nbsp;<%= Employee.last_name %></option>
+                            <% }) %>
+                          <% } else { %>
+                              <p>no members</p>
+                          <% } %>
+                        </select>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Select</button>
+                  </form>
+                </div>
+      
+              </div>
+            </div>
+          </div><!-- /.container-fluid -->
+        </section>
+    
+        <!-- Main content -->
+        <section class="content">
+          <div class="container-fluid" >
+            <% if(checkSupervisorADD){ %>
+            <div class="card" id="">
+            <div class="card-header">
+                <h3 class="card-title" style="font-size: 30px;">Add Members to Supervisor Group: <%= supervisor_id %> </h3>
+              </div>
+
+              <form  action="/manager/addSupervisor/save" method="POST" id="estimate_form">
+                <div class="card-body">
+                  <div id="err_msg0">
+                    <!-- for error msg -->
+                  </div>
+
+                  <div class="form-group">
+                    <label for="material">Select an Employee</label>
+                    <select class="form-control" id='addSuemployee_select'>
+                      <option value="" disabled selected>select an employee</option>
+                      <% if (employeeListToAddSupervisor.length > 0){ %>
+                        <% employeeListToAddSupervisor.forEach(employee => { %>
+                          <% if (employee.employee_id !=supervisor_id){ %>
+                          <option><%= employee.employee_id %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= employee.first_name %>&nbsp;<%= employee.last_name %></option>
+                          <% } %>
+                          <% }) %>
+                      <% } else { %>
+                          <p>no members</p>
+                      <% } %>
+                    </select>
+                  </div>
+                  <div>
+                    <button class="btn btn-add btn-primary" type="button" id="addMember">Add Member</button>
+                  </div>
+                  <br/>
+                  <% if(supervisorGroup.length>0) {%> 
+                  <table id="estimatecreate_table" class="table table-bordered table-striped table-hover">
+                    <thead style="background: rgb(31, 111, 158); color: rgb(255, 255, 255);" >
+                      <tr>
+                        <th>#</th>
+                        <th>Employee ID</th>
+                        <th>Employee First Name</th>
+                        <th>Employee Last Name</th>
+                        <th style="width: 120px" class="text-center">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% for(var i=0; i< supervisorGroup.length; i++){ %>
+                      <tr>
+                        <td><%= i+1 %></td>
+                        <td><%= supervisorGroup[i].employee_id %></td>
+                        <td><%= supervisorGroup[i].first_name %></td>
+                        <td><%= supervisorGroup[i].last_name %></td>
+                        <td class="text-center">
+                          <a href="/manager/addSupervisor/delete/<%= supervisorGroup[i].employee_id %>" class="viewData" data-id="<%= supervisorGroup[i].employee_id %>"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                        </tr>
+                      <% } %>
+                    </tbody>
+                  </table>
+                  <% } %>
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </form>
+            </div>
+            <% } %>
+            <br/>
+          </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+      </div>
+      <!-- /.content-wrapper -->
+    
+    <%- include('_footer') %>
+    <script> 
+       let  addMember = document.getElementById("addMember");
+       addMember.addEventListener('click',()=>{
+        let addSuemployee_select = $('#addSuemployee_select').val();
+        if(addSuemployee_select != null){
+          // alert(addSuemployee_select);
+            $.ajax({
+                          type: "POST",
+                          url: '/manager/addSupervisor/addMember',
+                          data: {
+                            "addSuemployee_select": addSuemployee_select
+                          },    
+                          success: function (response) {
+                              // $('#create_account_form_submit').children('.reg-success').remove();
+                              if (response.result == 'redirect') {
+                                  //redirecting
+                                  window.location.replace(response.url);
+                                }
+                          },
+                          error: function (res) {
+                          }
+                      });
+        }
+        
+          
+        }
+       );
+
+    </script>
+    </html>

@@ -1,0 +1,95 @@
+<%-include('_header', {user}) %>
+<link rel="stylesheet" href="../../assets/css/loginStyle.css">
+
+
+<div id="main-wrapper" class="container mb-5" style="padding-top: 80px;">
+    <div class="row justify-content-center">
+        <div class="col-xl-10">
+            <div class="card border-0">
+                <div class="card-body p-0">
+                    <div class="row no-gutters">
+                        <div class="col-lg-10 m-auto">
+                            <div class="p-5">
+                              
+                                <div class="mb-5">
+                                    <h1 class="h1 font-weight-bold text-theme">Sign Up</h1>
+                                                                                
+                                            <% if(error) {%>
+                                                <div class="m-auto">
+                                                    <div class="alert alert-danger" role="alert">
+                                                    <%=error%>
+                                                    </div>
+                                                </div>
+                                            <%} %>
+                                           
+                                </div>
+ <!-- ################################################################################################################################################### -->
+                            <form method="POST" action="/admin/signup">
+                                <div class="form-group mb-3" ><label for="">NIC Number:</label><input class="form-control" type="text" name="NIC" placeholder="NIC" value="<%=NIC%>"></div>
+                                <div class="form-group mb-3" ><label for="">First Name:</label><input class="form-control" type="text" name="first_name" placeholder="First Name" value="<%=first_name%>"></div>
+                                <div class="form-group mb-3" ><label for="">Middle Name:</label><input class="form-control" type="text" name="middle_name" placeholder="Middle Name"></div>
+
+                                <div class="form-group mb-3" ><label for="">Last Name:</label><input class="form-control" type="text" name="last_name" placeholder="Last Name" value="<%=middle_name%>"></div>
+                                <div class="form-group mb-3" ><label for="">Gender:</label><select class="form-control" id="exampleFormControlSelect1" name="gender">
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option></select>
+                                </div>
+                              
+                                <div class="form-group mb-3" ><label for="">Birthday:</label><input class="form-control" type="Date" name="birthday" placeholder="Birthday" value="<%=birthday%>"></div>
+
+                                <div class="form-group mb-3"><label for="">Address:</label><input class="form-control" type="text" name="address" placeholder="Address" value="<%=address%>"></div>
+                                <div class="form-group mb-3"><label for="">City:</label><input class="form-control" type="text" name="city" placeholder="city" value="<%=city%>"></div>
+                                <div class="form-group mb-3"><label for="">Postal Code:</label><input class="form-control" type="text" name="postal_code" placeholder="postal code" value="<%=postal_code%>"></div>
+                                <div class="form-group mb-3"><label for="">Country:</label><input class="form-control" type="text" name="country" placeholder="country" value="<%=country%>"></div>
+                                <div class="form-group mb-3" ><label for="">Email:</label><input class="form-control" type="text" name="email" placeholder="email" value="<%=email%>"></div>
+
+                                <div class="form-group">
+                                    <label>phone:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" name="phone"  value="<%=phone%>" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-3" ><label for="">Password:</label><input class="form-control" type="password" name="password" placeholder="Password" value="<%=password%>"></div>
+
+
+                                <div class="form-group mb-3"><input class="form-control" id="url" type="hidden" name="photo" placeholder="photo" value=""></div>
+                                 <!-- adding image to cloudinary and get the url -->
+                                <div class="form-group mb-3">  <span>Upload image</span>
+                                    <input class="form-control" type="file" onchange="setImage(this.files[0])" />
+                                    <div id="spinner" class="" role="status">
+                                </div></div>
+
+
+
+                                <div class="form-group mb-3" ><label for="">Security Key:</label><input class="form-control" type="text" name="securityKey" placeholder="security key"></div>
+                                <div class="form-group mb-3" ><button class="btn btn-primary" type="submit">submit</button></div>
+                            </form>
+<!-- ############################################################################################################################################################################## -->
+                    </div>
+                    </div>
+
+                    
+                    </div>
+
+                    </div>
+                    <!-- end card-body -->
+                    </div>
+                    <!-- end card -->
+
+
+                    <!-- end row -->
+
+                    </div>
+                    <!-- end col -->
+                    </div>
+                    <!-- Row -->
+                    </div>
+
+<script src="../../assets/js/imageUpload.js"></script>
+
+
+<%-include('_footer',{user}) %>

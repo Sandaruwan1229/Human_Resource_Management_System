@@ -1,0 +1,103 @@
+.sidebar1 {
+  height: 2000px;
+}
+
+.leave-body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 100px;
+  /* Location of the box */
+  /* left: 5;
+  top: 0;
+  margin-left: 100px; */
+  margin-left: 25%;
+  /* margin-right: 100px; */
+  width: 50%;
+  /* Full width */
+  height: 85%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.loginpage {
+  margin: auto;
+}
+
+.leaveReq {
+  padding-top: 40px;
+  margin: auto;
+  width: 500px;
+}
+
+.calender {
+  margin: auto;
+  left: 100px;
+}
+
+.dashboard {
+  position: relative;
+  overflow: hidden;
+  padding: 16px;
+}
+
+.dashboard img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+}
+
+link {
+  color: #fefefe;
+}
+
+.dashboard a {
+  color: #000;
+}
+
+.dashboard li {
+  color: #000;
+}
+.barchart {
+  border-radius: 10px;
+}

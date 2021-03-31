@@ -1,0 +1,64 @@
+<%- include('_header',{title:"Attendance"}) %>
+
+<%- include('_sidebar',{title:"Attendance"}) %>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Leaving Records</h1>
+                    </div><!-- /.col -->
+                    <div class="card-body table-responsive p-0">
+
+                        <table class="table table-hover text-nowrap " style="text-align: center;">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Leave ID</th>
+                                    <th scope="col">Leave Type</th>
+                                    <th scope="col">Apply Date</th>
+                                    <th scope="col">Start Date</th>
+                                    <th scope="col">Duration</th>
+                                    <th scope="col">approval state</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for (var i = 0; i < history.length; i++) { %>
+                                <tr>
+                                    <td><%= history[i].leave_id %></td>
+                                    <td><%= history[i].leave_type %></td>
+                                    <td><%= history[i].apply_date %></td>
+                                    <td><%= history[i].start_date %></td>
+                                    <td><%= history[i].duration %></td>
+                                    <td><%= history[i].approval_state %></td>
+
+                                </tr>
+                                <% } %>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+    </section>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%- include('_footer') %>

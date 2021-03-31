@@ -1,0 +1,64 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+
+
+
+</head>
+<body>
+    <form action="post">
+
+          <div class="btn  #448aff blue accent-2" >
+            <span>Upload image</span>
+            <input type="file" onchange="setImage(this.files[0])" />
+            <div id="spinner" class="" role="status">
+            </div>
+          </div>
+          
+          <input type="text" id="url" name="photo" value="">
+      
+        
+    </form>
+
+
+<script>
+
+const setImage=(image)=>{
+    document.getElementById("spinner").className="spinner-border"
+    const data=new FormData()
+    data.append("file", image)
+    data.append("upload_preset", "insta_clone")
+    data.append("cloud_name", "dm36weewi")
+    fetch("https://api.cloudinary.com/v1_1/dm36weewi/image/upload",{
+      method:"post",
+      body:data
+    }).then(res=>res.json()).then(data=>{
+
+      if(data.error){
+          setUrl("")
+      }else{
+        setUrl(data.url)
+      }
+
+    }
+
+    )}
+const setUrl=(url)=>{
+    if(url){
+    document.getElementById("spinner").className=""
+    // document.getElementById('url').innerHTML=url
+    document.getElementById('url').value=url
+    }
+}
+
+
+</script>
+
+</body>
+</html>

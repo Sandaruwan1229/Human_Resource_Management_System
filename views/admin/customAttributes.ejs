@@ -1,0 +1,79 @@
+<%-include("_header", {user}) %>
+
+
+<div>
+    <div class="container-fluid">
+        <div class="row">
+           
+            <div class="col-12">
+                <div class="row" style="margin-top: 159px;">
+                     
+                    <% if(error) {%>
+                        <div class="col-8 m-auto">
+                            <div class="alert alert-danger" role="alert">
+                               <%=error%>
+                              </div>
+                        </div>
+                    <%} %>
+                    <% if(success) {%>
+                        <div class="col-8 m-auto">
+                            <div class="alert alert-success" role="alert">
+                               <%=success%>
+                              </div>
+                        </div>
+                    <%} %>
+
+<!--##########################################################################################################################--> -->
+                <div class="col-8 m-auto p-5  bg-light">
+                  <div class="col-sm-8"><h2>Add custom attributes</h2></div>
+
+                  
+                    <form action="/admin/addCustomAttribute" method="POST">
+
+
+                    <div class="form-group mb-3">
+                        <label for="">name</label>
+                        <input class="form-control" type="text" name="name" placeholder="" value="" required>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label for="">Type</label>
+                        <select class="form-control" id="exampleFormControlSelect1" onchange="display(this.value)">
+                                <option value=""></option>
+                                <option value="varchar">Variable Char</option>
+                                <option value="bool">Boolean</option>
+                                <option value="int">Integer</option>
+
+                        </select>
+
+                        <div id="add" class="col-4 ml-0"></div>
+                    </div>
+
+
+                  
+
+
+                    <button class="btn btn-primary" type="submit">submit</button>
+
+                    </form>
+<!-- #################################################################################################################################### -->
+                    </div>
+                </div>
+             </div>
+         </div>
+     </div>
+ </div>
+</div>
+</div>
+<script src="../../assets/js/customAtrribute.js"></script>
+<script>
+    function display(val){
+        if(val=="bool") document.getElementById("add").innerHTML=bool;
+        else if(val=="varchar") document.getElementById("add").innerHTML=varchar;
+        else if(val=="int") document.getElementById("add").innerHTML=int;
+        else document.getElementById("add").innerHTML="";
+    }
+    
+</script>
+
+<%-include("_footer", {user}) %>

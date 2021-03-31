@@ -1,0 +1,258 @@
+<%- include('_header',{title:" Leave Report"}) %>
+
+
+    <%- include('_sidebar') %>
+
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="card">
+                        <form id="search_employees" action="/HR/findLeave" method="POST">
+                            <% if(error) {%>
+                                <div class="col-9 m-auto">
+                                    <div class="alert alert-danger" role="alert">
+                                        <%=error%>
+                                    </div>
+                                </div>
+                                <%} %>
+                            <div class="card-body"
+                                style="background:linear-gradient(to left,rgb(180, 180, 180),rgb(219, 203, 203),rgb(180, 180, 180))">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Start Date</label>
+                                            <input class="form-control datetimepicker-input" type="date" name="startdate" value="<%=dates.startDate%>" required>
+                                        </div>
+                                    </div>
+                                    <!-- select Deptment name -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>End Date</label>
+                                            <input class="form-control datetimepicker-input" type="date" name="endDate" value="<%=dates.endDate%>" required>
+                                        </div>
+                                    </div>
+                                    
+                                <button type="submit" class="btn btn-primary" style="width: 100px;"
+                                    id="searchEmployees">Search</button>
+                                </div>
+                            </div>
+                            <!-- card body -->
+                        </form>
+                    </div>
+                    <!-- /card -->
+                </div><!-- /.container-fluid -->
+            </section>
+            <br><br><br>
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-header" style="background-color: rgb(180, 180, 180);">
+                            <h3 class="card-title" >Employees applied for leave</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body" style="background:linear-gradient(to bottom,rgb(246, 248, 255),rgb(255, 255, 255),rgb(242, 245, 255))">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+
+                                    <tr>
+                                        <th style="width: 40px">#</th>
+                                        <th style="background-color: rgb(221, 240, 240);">Department Name </th>
+                                        <th style="background-color: rgb(221, 240, 240);">Leaves from <%= dates.startDate %> to <%= dates.endDate %>  </th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+                                    <% for (var i=0; i < departmentlist.length; i++) { %>
+
+                                        <tr data-id="<%= departmentlist[i].dept_name %>">
+                                            <td><%= i+1 %></td>
+                                            <td><%= departmentlist[i].dept_name %></td>
+                                            <td><%= departmentlist[i].count %></td>
+                                        </tr>
+                                        <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+
+                    </div>
+                    <!-- /.card -->
+                    </div><!-- /.container-fluid -->
+                    </section>
+                    <br><br>
+                    <section class="content">
+                        <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-header" style="background-color: rgb(180, 180, 180);">
+                            <h3 class="card-title">Approved Leaves</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body" style="background:linear-gradient(to bottom,rgb(246, 248, 255),rgb(255, 255, 255),rgb(242, 245, 255))">
+                            <table id="example2" class="table table-bordered table-striped">
+                                <thead>
+                    
+                                    <tr>
+                                        <th style="width: 40px">#</th>
+                                        <th style="background-color: rgb(221, 240, 240);">Department Name </th>
+                                        <th style="background-color: rgb(221, 240, 240);">Leaves from <%= dates.startDate %> to <%=
+                                                    dates.endDate %>
+                                        </th>
+                                    </tr>
+                    
+                                </thead>
+                    
+                                <tbody>
+                                    <% for (var i=0; i < departmentlistAp.length; i++) { %>
+                    
+                                        <tr data-id="<%= departmentlistAp[i].dept_name %>">
+                                            <td>
+                                                <%= i+1 %>
+                                            </td>
+                                            <td>
+                                                <%= departmentlistAp[i].dept_name %>
+                                            </td>
+                                            <td>
+                                                <%= departmentlistAp[i].count %>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+            <br><br>
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-header" style="background-color: rgb(180, 180, 180);">
+                            <h3 class="card-title">All leaves by Type</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body"
+                            style="background:linear-gradient(to bottom,rgb(246, 248, 255),rgb(255, 255, 255),rgb(242, 245, 255))">
+                            <table id="example2" class="table table-bordered table-striped">
+                                <thead>
+            
+                                    <tr>
+                                        <th style="width: 40px">Type of Leave</th>
+                                        <% for (var i=0; i < departmentleave[0].length; i++) { %>
+                                            <th style="background-color: rgb(221, 240, 240);">
+                                                <%= departmentleave[0][i].dept_name %>
+                                            </th>
+                                        <% } %>
+                                    </tr>
+            
+                                </thead>
+            
+                                <tbody>
+                                    <% for (var i=0; i < departmentleave.length; i++) { %>
+                                        <% if(i==0){ %>
+                                            <tr data-id="Anual">
+                                            
+                                            <td>
+                                                <label for="">Anual</label>
+                                            </td>
+                                        <% }else if(i==1){ %>
+                                            <tr data-id="Casual">
+                                               
+                                                <td>
+                                                    <label for="">Casual</label>
+                                                </td>
+                                        <% }else if(i==2){ %>
+                                            <tr data-id="Maternity">
+                                               
+                                                <td>
+                                                    <label for="">Maternity</label>
+                                                </td>
+                                        <% }else if(i==3){ %>
+                                            <tr data-id="No_Pay">
+                                                
+                                                <td>
+                                                    <label for="">No Pay</label>
+                                                </td>
+                                        <% } %>
+                                           
+                                            <% for (var j=0; j < departmentleave[i].length; j++) { %>
+                                                <% if(departmentleave[i][j].leavecountbydep != null){ %>
+                                                    <td><%= departmentleave[i][j].leavecountbydep %></td>
+                                                <% }else{ %>
+                                                     <td><%= 0 %></td>
+                                                <% } %>
+                                            <% } %>
+                                        </tr>
+                                        <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+            
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+        </div>
+        <!-- /.content-wrapper -->
+
+        <%- include('_footer') %>
+            <!-- DataTables  & Plugins -->
+    <script src="/assets/public/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/public/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/assets/public/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/assets/public/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="/assets/public/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/assets/public/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="/assets/public/plugins/jszip/jszip.min.js"></script>
+    <script src="/assets/public/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="/assets/public/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="/assets/public/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="/assets/public/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="/assets/public/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="/assets/public/plugins/select2/js/select2.full.min.js"></script>
+
+
+
+<script>
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+        //Initialize Select2 Elements
+        $('.select2').select2();
+
+        //Initialize Select2 Elements
+        // $('.select2bs4').select2({
+        //   theme: 'bootstrap4'
+        // })
+    });
+
+</script>
+<script>
+    $(function () {
+        $("#example2").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print"]
+        }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+
+        //Initialize Select2 Elements
+        $('.select2').select2();
+
+        //Initialize Select2 Elements
+        // $('.select2bs4').select2({
+        //   theme: 'bootstrap4'
+        // })
+    });
+
+</script>
+
+</html>

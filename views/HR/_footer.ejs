@@ -1,0 +1,66 @@
+<!-- jQuery -->
+<script src="../../assets/public/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../assets/public/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../assets/public/dist/js/adminlte.min.js"></script>
+
+<script>
+    function check(){
+        const nic = document.getElementsByName('NIC')[0].value;
+        const phone = document.getElementsByName('phone')[0].value.toString();
+        const bdate = document.getElementsByName('birthday')[0].value;
+        const password = document.getElementsByName('password')[0].value;
+        const repassword = document.getElementsByName('repassword')[0].value;
+        if((nic.length==10 && nic.charAt(9)=='V' && !isNaN(nic.substring(0,9))) || nic.length==12 && !isNaN(nic)){
+            var d = new Date();
+            var n = d.getFullYear();
+            if(phone.length==10){
+                if(n-parseInt(bdate.substring(0,4))>18 && (n - parseInt(bdate.substring(0, 4)) < 60)){
+                    if(password.length>7 && password==repassword){
+                        $('#sbmtbtn').attr('disabled', false);
+                        
+                    }
+                    else{
+                        alert("Password does not match or password need minimum 8 charactors");
+                    }
+                }
+                else{
+                    alert("incorrect Bday");
+                }   
+            }
+            else{
+                alert("Incorrect Phone number")
+            }
+        }
+        else{
+            alert("Incorrect NIC")
+        }
+       
+    }
+    function disableButon(){
+       // 
+       setTimeout(function () { $('#sbmtbtn').attr('disabled', true); }, 1000);
+    }
+    
+</script>
+
+<!-- /.content-wrapper -->
+<footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+        <b>All rights reserved</b>
+    </div>
+    <strong>Copyright &copy; 2021 <a>DBMS Project-Group 15</a>.</strong>
+</footer>
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+</body>
+
+
+</html>

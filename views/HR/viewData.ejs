@@ -1,0 +1,514 @@
+<%- include('_header',{title:"PIM Data"}) %>
+
+
+<%- include('_sidebar',{title:"PIM Data"}) %>
+
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mx-2">
+                <div class="col-sm-12">
+                    <!-- <h1>Icons</h1> -->
+
+                    <div class="card card-primary"
+                        style="background:linear-gradient(to left,rgb(180, 180, 180),rgb(219, 203, 203),rgb(180, 180, 180)) ;">
+                        <form id="search_employeeBYid" action="/HR/viewData" method="POST">
+                            <div class="card-body">
+                                <div id="err_msg4">
+                                    <!-- for error msg -->
+                                </div>
+                                <div class="form-group">
+                                    <label>Enter Employee ID</label>
+                                    <input type="number" class="form-control" id="e_id" name="e_id"
+                                        placeholder="Enter Employee ID" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Search</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row mx-2">
+                <div class="col-sm-12" style="padding-right: 1vw">
+                    <!-- <h1>Icons</h1> -->
+                    <h1 style="color: rgb(17, 71, 172); text-align: center; text-decoration: underline; margin: 3%;">
+                        Employee Details</h1>
+                    <form method="POST" action="/HR/viewData/updateEmployee">
+                        <% if(error) {%>
+                        <div class="col-9 m-auto">
+                            <div class="alert alert-danger" role="alert">
+                                <%=error%>
+                            </div>
+                        </div>
+                        <%} %>
+                        <% if(success) {%>
+                        <div class="col-9 m-auto">
+                            <div class="alert alert-success text-center" role="alert">
+                                <%=success%>
+                            </div>
+                        </div>
+                        <%} %>
+                        <div class="card card-default"
+                            style="background:linear-gradient(to left,rgb(180, 180, 180),rgb(219, 203, 203),rgb(180, 180, 180)) ;">
+                            <div class="card-header" style="background: rgb(6, 54, 82);">
+                                <h3 class="card-title" style="color: rgb(255, 255, 255);">Personal details
+                                    <%= empDATA.length>0 ? `of Employee ID: ${empDATA[0].employee_id}` : ''%></h3>
+                                <input name="ID" value="<%= empDATA.length>0 ? empDATA[0].employee_id : ''%>"
+                                    style="display: none;">
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <!-- text input -->
+                                        <div class="form-group">
+                                            <label>NIC</label>
+                                            <input type="text" class="form-control"
+                                                placeholder="<%= empDATA.length>0 ? empDATA[0].nic : ''%>" id="NIC"
+                                                name="NIC" value="<%= empDATA.length>0 ? empDATA[0].nic : ''%>" required
+                                                disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Email</label>
+                                        <!-- text input -->
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i
+                                                            class="fas fa-envelope"></i></span>
+                                                </div>
+                                                <input type="email" class="form-control"
+                                                    placeholder="<%=empDATA.length>0 ? empDATA[0].email : ''%>"
+                                                    id="email" name="email"
+                                                    value="<%=empDATA.length>0 ? empDATA[0].email : ''%>" required
+                                                    disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <!-- text input -->
+                                        <div class="form-group">
+                                            <label>First Name</label>
+                                            <input type="text" class="form-control"
+                                                placeholder="<%=empDATA.length>0 ? empDATA[0].first_name : ''%>"
+                                                id="first_name" name="first_name"
+                                                value="<%=empDATA.length>0 ? empDATA[0].first_name : ''%>" required
+                                                disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <!-- text input -->
+                                        <div class="form-group">
+                                            <label>Middle Name</label>
+                                            <input type="text" class="form-control"
+                                                placeholder="<%=empDATA.length>0 ? empDATA[0].middle_name : ''%>"
+                                                id="middle_name" name="middle_name"
+                                                value="<%=empDATA.length>0 ? empDATA[0].middle_name : ''%>" required
+                                                disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <!-- text input -->
+                                        <div class="form-group">
+                                            <label>Last Name</label>
+                                            <input type="text" class="form-control"
+                                                placeholder="<%=empDATA.length>0 ? empDATA[0].last_name : ''%>"
+                                                id="last_name" name="last_name"
+                                                value="<%=empDATA.length>0 ? empDATA[0].last_name : ''%>" required
+                                                disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <!-- text input -->
+                                        <div class="form-group">
+                                            <label>Contact number:</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                                </div>
+                                                <input type="number" class="form-control" id="phone" name="phone"
+                                                    placeholder="<%=empDATA.length>0 ? empDATA[0].phone : ''%>"
+                                                    value="<%=empDATA.length>0 ? empDATA[0].phone : ''%>" required
+                                                    disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Gender</label>
+                                            <div class="form-check">
+                                                <% if(empDATA.length>0){
+                                                if(empDATA[0].gender === "Male"){ %>
+                                                <input class="form-check-input" type="radio" id="genderM" name="gender"
+                                                    value="Male" required checked disabled>
+                                                <label class="form-check-label" style="padding-right: 7%;">Male</label>
+
+                                                <input class="form-check-input" type="radio" id="genderF" name="gender"
+                                                    value="Female" required disabled>
+                                                <label class="form-check-label">Female</label>
+
+                                                <% }else{ %>
+                                                <input class="form-check-input" type="radio" id="genderM" name="gender"
+                                                    value="Male" required disabled>
+                                                <label class="form-check-label" style="padding-right: 7%;">Male</label>
+
+                                                <input class="form-check-input" type="radio" id="genderF" name="gender"
+                                                    value="Female" required checked disabled>
+                                                <label class="form-check-label">Female</label>
+
+                                                <% }}else{ %>
+                                                <input class="form-check-input" type="radio" id="genderM" name="gender"
+                                                    value="Male" required disabled>
+                                                <label class="form-check-label" style="padding-right: 7%;">Male</label>
+
+                                                <input class="form-check-input" type="radio" id="genderF" name="gender"
+                                                    value="Female" required disabled>
+                                                <label class="form-check-label">Female</label>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Birth Date:</label>
+                                            <% birthday =  empDATA.length>0 ? `${empDATA[0].birth_day.getMonth()+1}/${empDATA[0].birth_day.getDate()}/${empDATA[0].birth_day.getFullYear()}` : '' %>
+                                            <input class="form-control datetimepicker-input" type="text" id="birthday"
+                                                name="birthday" placeholder="<%= birthday %>"
+                                                onfocus="(this.type='date')" value="<%= birthday %>" required disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- input states -->
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <!-- text input -->
+                                        <div class="form-group">
+                                            <label>Address</label>
+                                            <input type="text" class="form-control"
+                                                placeholder="<%=empDATA.length>0 ? empDATA[0].address : ''%>"
+                                                id="address_id" name="address_id"
+                                                value="<%=empDATA.length>0 ? empDATA[0].address : ''%>" required
+                                                disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>City</label>
+                                            <input type="text" class="form-control"
+                                                placeholder="<%=empDATA.length>0 ? empDATA[0].city : ''%>" id="city"
+                                                name="city" value="<%=empDATA.length>0 ? empDATA[0].city : ''%>"
+                                                required disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Postal Code</label>
+                                            <input type="number" class="form-control"
+                                                placeholder="<%=empDATA.length>0 ? empDATA[0].postal_code : ''%>"
+                                                id="postal_code" name="postal_code"
+                                                value="<%=empDATA.length>0 ? empDATA[0].postal_code : ''%>" required
+                                                disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Country</label>
+                                            <input type="text" class="form-control"
+                                                placeholder="<%=empDATA.length>0 ? empDATA[0].country : ''%>"
+                                                id="country" name="country"
+                                                value="<%=empDATA.length>0 ? empDATA[0].country : ''%>" required
+                                                disabled>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card-default"
+                            style="background:linear-gradient(to left,rgb(180, 180, 180),rgb(219, 203, 203),rgb(180, 180, 180)) ; margin-top: 5%;">
+                            <div class="card-header" style="background: rgb(158, 214, 247);">
+                                <h3 class="card-title" style="color: rgb(255, 255, 255);">Employee Details</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <!-- select -->
+                                        <div class="form-group">
+                                            <label>Branch</label>
+                                            <select class="form-control" id="branch" name="branch" disabled>
+                                                <% if(empDATA.length>0){ %>
+                                                <option value="<%= empDATA[0].branch_name %>">
+                                                    <%= empDATA[0].branch_name %>
+                                                </option>
+                                                <% } %>
+                                                <% if(branches && branches[0]){ branches.forEach(function(branch){ %>
+
+                                                <option value="<%=branch.branch_name%>"><%=branch.branch_name%></option>
+
+                                                <% })} %>
+
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <!-- select -->
+                                        <div class="form-group">
+                                            <label>Job Title</label>
+                                            <select class="form-control" id="jobTitle" name="jobTitle" disabled>
+                                                <% if(empDATA.length>0){ %>
+                                                <option value="<%= empDATA[0].job_title %>">
+                                                    <%= empDATA[0].job_title %>
+                                                </option>
+                                                <% } %>
+                                                <% if(Jobtypes && Jobtypes[0]){ Jobtypes.forEach(function(Jobtype){ %>
+                                                <% if(Jobtype.job_title !== user) {%>
+                                                <option value="<%=Jobtype.job_title%>">
+                                                    <%=Jobtype.job_title%>
+                                                </option>
+                                                <% }%>
+                                                <% })} %>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <!-- select -->
+                                        <div class="form-group">
+                                            <label>Department</label>
+                                            <select class="form-control" id="department" name="department" disabled>
+                                                <% if(empDATA.length>0){ %>
+                                                <option value="<%= empDATA[0].dept_name %>">
+                                                    <%= empDATA[0].dept_name %>
+                                                </option>
+                                                <% } %>
+                                                <% if(departments && departments[0]){ departments.forEach(function(department){%>
+                                                <option value="<%=department.dept_name%>">
+                                                    <%=department.dept_name%>
+                                                </option>
+                                                <% })} %>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <!-- select -->
+                                        <div class="form-group">
+                                            <label>Pay Grade Level</label>
+                                            <select class="form-control" id="payGrade" name="payGrade" disabled>
+                                                <% if(empDATA.length>0){ %>
+                                                <option value="<%= empDATA[0].paygrade_level %>">
+                                                    <%= empDATA[0].paygrade_level %>
+                                                </option>
+                                                <% } %>
+                                                <% if(payGrades && payGrades[0]){ payGrades.forEach(function(payGrade){%>
+                                                <option value="<%=payGrade.paygrade_level%>">
+                                                    <%=payGrade.paygrade_level%>
+                                                </option>
+                                                <% })}  %>
+
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <!-- select -->
+                                        <div class="form-group">
+                                            <label>Employee Status</label>
+                                            <select class="form-control" id="empStatus" name="empStatus" disabled>
+                                                <% if(empDATA.length>0){ %>
+                                                <option value="<%= empDATA[0].e_status_name %>">
+                                                    <%= empDATA[0].e_status_name %>
+                                                </option>
+                                                <% } %>
+                                                <% if(employee_statuses && employee_statuses[0]){ employee_statuses.forEach(function(employee_status){ %>
+                                                <option value="<%=employee_status.e_status_name%>">
+                                                    <%=employee_status.e_status_name%>
+                                                </option>
+                                                <% })}  %>
+
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- custom attributes section -->
+                        <% if(customAttributes && customAttributes[0]){ %>
+
+                        <div class="card card-default"
+                            style="background:linear-gradient(to left,rgb(180, 180, 180),rgb(219, 203, 203),rgb(180, 180, 180)) ; margin-top: 5%;">
+                            <div class="card-header" style="background: rgb(6, 54, 82);">
+                                <h3 class="card-title" style="color: rgb(255, 255, 255);">Employee Details additional
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+
+
+                                    <% customAttributes.forEach(function(customAttribute){
+                                    let valString= `empDATA[0].${customAttribute.name}`
+                                    if(!empDATA.length>0){valString=""}
+                                    if(customAttribute.type=="boolean") { %>
+                                    <div class="col-sm-6">
+                                        <div class="form-group" name>
+                                            <label for=""><%=customAttribute.name%>:</label>
+                                            <select class="form-control" id="customAttr"
+                                                name="<%=customAttribute.name%>" disabled>
+                                                <option value="<%= eval(valString)? ture : false  %>">
+                                                    <%= eval(valString)? ture : false  %></option>
+                                                <option value="<%= eval(valString)? false: true  %>">
+                                                    <%= eval(valString)? false: true   %></option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <% }else if(customAttribute.type=="varchar"){    %>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for=""><%=customAttribute.name%>:</label>
+                                            <input class="form-control" id="customAttr" type="text"
+                                                name="<%=customAttribute.name%>" placeholder=""
+                                                value="<%=eval(valString)  %>" required disabled>
+
+                                        </div>
+                                    </div>
+                                    <% }else if(customAttribute.type=="integer"){ %>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for=""><%=customAttribute.name%>:</label>
+                                            <input class="form-control" id="customAttr" type="number"
+                                                name="<%=customAttribute.name%>" placeholder=""
+                                                value="<%=eval(valString) %>" required disabled>
+                                        </div>
+                                    </div>
+                                    <% }}) %>
+                                </div>
+                            </div>
+                        </div>
+
+                        <% } %>
+                        <!-- end of the custom attributes -->
+
+
+
+
+                        <% if(empDATA.length>0) { %>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-block btn-primary"
+                                        onclick="enableEdit()">Edit</button>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-block btn-primary" id="savebtn"
+                                        onclick="check1()" disabled>Save</button>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+
+                                    <button type="Submit" class="btn btn-block btn-primary" name="submitButton"
+                                        id="sbmtbtn" onclick="disableButon()" disabled>Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+
+
+
+
+
+                    </form>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<%- include('_footer') %>
+
+</html>
+
+<script>
+    function enableEdit() {
+        var r = confirm("Do you want to edit this employee data?");
+
+        if (r) {
+            $('#NIC').attr('disabled', false);
+            $('#email').attr('disabled', false);
+            $('#first_name').attr('disabled', false);
+            $('#middle_name').attr('disabled', false);
+            $('#last_name').attr('disabled', false);
+            $('#phone').attr('disabled', false);
+            $('#genderM').attr('disabled', false);
+            $('#genderF').attr('disabled', false);
+            $('#birthday').attr('disabled', false);
+            $('#address_id').attr('disabled', false);
+            $('#city').attr('disabled', false);
+            $('#postal_code').attr('disabled', false);
+            $('#country').attr('disabled', false);
+            $('#customFile').attr('disabled', false);
+            $('#branch').attr('disabled', false);
+            $('#jobTitle').attr('disabled', false);
+            $('#department').attr('disabled', false);
+            $('#payGrade').attr('disabled', false);
+            $('#empStatus').attr('disabled', false);
+            $('#salary').attr('disabled', false);
+            $('#savebtn').attr('disabled', false);
+            $('#customAttr').attr('disabled', false);
+
+        }
+
+    }
+
+    function check1() {
+        const nic = document.getElementsByName('NIC')[0].value;
+        const phone = document.getElementsByName('phone')[0].value.toString();
+        const bdate = document.getElementsByName('birthday')[0].value;
+
+        if ((nic.length == 10 && nic.charAt(9) == 'V' && !isNaN(nic.substring(0, 9))) || nic.length == 12 && !isNaN(
+                nic)) {
+
+            var d = new Date();
+            var n = d.getFullYear();
+            if (phone.length == 10) {
+                if (n - parseInt(bdate.substring(0, 4)) > 18) {
+                    $('#sbmtbtn').attr('disabled', false);
+                } else {
+                    alert("incorrect Bday");
+                }
+            } else {
+                alert("Incorrect Phone number")
+            }
+        } else {
+            alert("Incorrect NIC")
+        }
+
+    }
+
+    function disableButon() {
+        // 
+        setTimeout(function () {
+            $('#savebtn').attr('disabled', true);
+            $('#sbmtbtn').attr('disabled', true);
+        }, 1000);
+    }
+</script>
